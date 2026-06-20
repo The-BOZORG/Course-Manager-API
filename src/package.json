@@ -1,0 +1,28 @@
+{
+  "name": "course-manager-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch --inspect --env-file=.env index.js"
+  },
+  "keywords": [],
+  "author": "soroush",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@adminjs/express": "^6.1.1",
+    "@adminjs/sequelize": "^4.1.1",
+    "adminjs": "^7.8.17",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.11.0",
+    "mysql2": "^3.22.5",
+    "sequelize": "^6.37.8",
+    "zod": "^4.4.3"
+  }
+}
