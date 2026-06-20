@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
-import colors, { bold } from 'colors';
+import colors from 'colors';
 
-export const dataBase = new Sequelize(
+export const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USERNAME,
   process.env.DB_PASSWORD,
@@ -15,13 +15,16 @@ export const dataBase = new Sequelize(
 
 export async function connectToDatabase() {
   try {
-    await dataBase.authenticate();
+    await sequelize.authenticate();
     console.log(
-      `Database connected: ${dataBase.config.host}:${dataBase.config.port}`.cyan
-        .underline.bold,
+      `✓ Database connected: ${sequelize.config.host}:${sequelize.config.port}`
+        .cyan.underline.bold,
     );
   } catch (error) {
-    console.log('Unable to connect to the database'.red.underline.bold, error);
+    console.log(
+      '✗ Unable to connect to the database'.red.underline.bold,
+      error,
+    );
 
     process.exit(1);
   }

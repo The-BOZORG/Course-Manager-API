@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch --inspect --env-file=.env index.js"
+    "start": "node --watch --inspect --env-file=.env server.js"
   },
   "keywords": [],
   "author": "soroush",
