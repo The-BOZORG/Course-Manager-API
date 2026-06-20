@@ -29,3 +29,12 @@ export async function connectToDatabase() {
     process.exit(1);
   }
 }
+
+export async function disconnectDatabase() {
+  try {
+    await sequelize.close();
+    console.log('✓ Database connection closed'.yellow.bold);
+  } catch (error) {
+    console.error('✗ Error while closing database connection'.red.bold, error);
+  }
+}
