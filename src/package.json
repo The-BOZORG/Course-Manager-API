@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch --inspect --env-file=.env server.js | npx pino-pretty"
+    "start": "node --watch --inspect --env-file=.env server.js",
+    "logs": "node server.js | pino-pretty"
   },
   "keywords": [],
   "author": "soroush",
