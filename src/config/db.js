@@ -1,6 +1,5 @@
 import { logger } from '../utils/logger.js';
 import { Sequelize } from 'sequelize';
-import colors from 'colors';
 
 export const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -18,11 +17,10 @@ export async function connectToDatabase() {
   try {
     await sequelize.authenticate();
     logger.info(
-      `🟢 Database connected: ${sequelize.config.host}:${sequelize.config.port}`
-        .cyan.underline.bold,
+      `Database connected: ${sequelize.config.host}:${sequelize.config.port}`,
     );
   } catch (error) {
-    logger.warn('Unable to connect to the database'.red.underline.bold, error);
+    logger.error('Unable to connect to the database', error);
 
     process.exit(1);
   }
@@ -31,8 +29,8 @@ export async function connectToDatabase() {
 export async function disconnectDatabase() {
   try {
     await sequelize.close();
-    logger.info(' Database connection closed'.yellow.bold);
+    logger.warn('Database connection closed');
   } catch (error) {
-    logger.warn(' Error while closing database connection'.red.bold, error);
+    logger.error('Error while closing database connection', error);
   }
 }
