@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import { notFound } from './middlewares/404';
+import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(notFound);
+app.use(errorHandler);
 
 export default app;
