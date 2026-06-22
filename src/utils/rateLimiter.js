@@ -4,8 +4,9 @@ export const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 
-  standardHeaders: true, //Ratelimit header
-  legacyHeaders: false, //X-Rate-Limit header
+  //these headers tell the client how much of the quota is left
+  standardHeaders: true,
+  legacyHeaders: false,
 
   handler: (req, res) => {
     res.status(429).json({

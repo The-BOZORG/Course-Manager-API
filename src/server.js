@@ -1,4 +1,5 @@
 import app from './index.js';
+import { logger } from './utils/logger.js';
 import { connectToDatabase, disconnectDatabase } from './config/db.js';
 import colors from 'colors';
 
@@ -8,16 +9,16 @@ async function bootstrap() {
   await connectToDatabase();
 
   const server = app.listen(PORT, () => {
-    console.log(`✓ Server running on http://localhost:${PORT}`.green.bold);
+    logger.info(`Server running on http://localhost:${PORT}`.green.bold);
   });
 
   process.on('SIGINT', async () => {
-    console.log('\n⚠️ Shutting down...'.yellow.bold);
+    logger.warn('Shutting down...'.yellow.bold);
 
     await disconnectDatabase();
 
     server.close(() => {
-      console.log('✓ Server closed'.green.bold);
+      logger.info('Server closed'.green.bold);
       process.exit(0);
     });
   });
