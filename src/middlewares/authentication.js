@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '../errors/unauthenticated.js';
+import { UnauthorizedError } from '../errors/unathorized.js';
 import { validToken } from '../utils/jwt.js';
 
 export const authenticateUser = async (req, res, next) => {

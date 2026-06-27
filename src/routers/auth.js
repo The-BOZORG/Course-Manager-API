@@ -8,6 +8,7 @@ import { authLimiter } from '../utils/rateLimiter.js';
 import { registerSchema, loginSchema } from '../utils/zodValidate.js';
 
 import { validateRequest } from '../middlewares/validateRequest.js';
+import { authenticateUser } from '../middlewares/authentication.js';
 
 const authRouter = Router();
 
@@ -20,6 +21,6 @@ authRouter.post(
 
 authRouter.post('/login', validateRequest(loginSchema), authLimiter, login);
 
-authRouter.post('logout', logout);
+authRouter.post('/logout', authenticateUser, logout);
 
 export default authRouter;
