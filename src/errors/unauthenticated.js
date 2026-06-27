@@ -4,6 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 class UnauthenticatedError extends CustomError {
   constructor(message) {
     super(message);
-    this.statusCode = StatusCodes.UnauthenticatedError;
+    this.statusCode = StatusCodes.UNAUTHORIZED;
   }
 }

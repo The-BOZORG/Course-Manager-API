@@ -23,6 +23,6 @@ export const attachCookie = ({ res, user }) => {
     httpOnly: true,
     expires: new Date(Date.now() + sevenDay),
     secure: process.env.NODE_ENV === 'production',
-    singed: true,
+    signed: true,
   });
 };
