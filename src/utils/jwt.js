@@ -15,7 +15,7 @@ export const validToken = ({ token }) => {
   return jwt.verify(token, process.env.JWT_ACCESS);
 };
 
-export const attachCookie = ({ res, user }) => {
+export const attachCookie = ({ res, token }) => {
   const sevenDay = 1000 * 60 * 60 * 24 * 7;
 
   res.cookie('token', token, {

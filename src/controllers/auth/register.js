@@ -1,7 +1,7 @@
 import { logger } from '../../utils/logger.js';
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/user.js';
-import { CustomError } from '../../errors/customError.js';
+import { ConflictError } from '../../errors/conflict.js';
 import { attachCookie, payloadToken, createToken } from '../../utils/jwt.js';
 
 export const register = asyncHandler(async (req, res) => {
@@ -12,8 +12,7 @@ export const register = asyncHandler(async (req, res) => {
     attributes: ['id', 'email'],
   });
 
-  if (existUser)
-    throw new CustomError.ConflictError('email already exist', 409);
+  if (existUser) throw new ConflictError('email already exist', 409);
 
   const adminAccount = (await User.count()) === 0;
   const role = adminAccount ? 'admin' : 'user';

@@ -1,11 +1,11 @@
-import { CustomError } from '../errors/customError.js';
+import { UnauthorizedError } from '../errors/unauthenticated.js';
 import { validToken } from '../utils/jwt.js';
 
 export const authenticateUser = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith('Bearer '))
-    throw new CustomError.UnauthorizedError('auth invalid', 401);
+    throw new UnauthorizedError('auth invalid', 401);
 
   const token = authHeader.split(' ')[1];
 
@@ -14,6 +14,6 @@ export const authenticateUser = async (req, res, next) => {
     req.user = { userId, role };
     next();
   } catch (error) {
-    throw new CustomError.UnauthorizedError('auth invalid', 401);
+    throw new UnauthorizedError('auth invalid', 401);
   }
 };
