@@ -12,21 +12,17 @@ const registerSchema = z.object({
       'Only letters, numbers and underscore are allowed',
     ),
 
-  email: z.object
-    .email('invalid email address')
-    .toLowerCase()
-    .trim()
-    .toLowerCase(),
+  email: z.email('invalid email address').toLowerCase().trim().toLowerCase(),
 
-  password: z.object
+  password: z
     .string()
     .trim()
     .min(6, 'password must more tha 6 characters')
-    .max(50)
-    .regex(
+    .max(50),
+  /*.regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
       'Password must contain uppercase, lowercase and number',
-    ),
+    ), */
 });
 
 const loginSchema = z.object({

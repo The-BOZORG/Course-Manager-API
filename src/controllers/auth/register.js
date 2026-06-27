@@ -10,6 +10,7 @@ export const register = asyncHandler(async (req, res) => {
   const existUser = await User.findOne({
     where: { email },
     attributes: ['id', 'email'],
+    raw: true,
   });
 
   if (existUser) throw new ConflictError('email already exist', 409);
@@ -36,6 +37,7 @@ export const register = asyncHandler(async (req, res) => {
     },
     accessToken,
   });
+
   logger.info('User registered successfully', {
     id: newUser.id,
     email: newUser.email,
