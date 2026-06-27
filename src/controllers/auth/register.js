@@ -1,0 +1,48 @@
+import { logger } from '../../utils/logger.js';
+import { asyncHandler } from '../../middlewares/asyncHandler.js';
+import { User } from '../../models/user.js';
+import { CustomError } from '../../errors/customError.js';
+import { attachCookie, payloadToken } from '../../utils/jwt.js';
+
+export const register = asyncHandler(async (req, res) => {
+  const { username, email, password } = req.body;
+
+  const existUser = await User.findOne({
+    where: { email },
+    attributes: ['id', 'email'],
+  });
+
+  if (existUser)
+    throw new CustomError.ConflictError('email already exist', 409);
+
+  const adminAccount = (await User.count()) === 0;
+  const role = adminAccount ? 'admin' : 'user';
+
+  const newUser = await User.create({
+    username,
+    email,
+    password,
+    role,
+  });
+
+  const payload = payloadToken(newUser);
+  attachCookie({ res, user: payload });
+
+  const payload = payloadToken(newUser); //payload
+  const accessToken = createToken({ payload }); //accessToken
+  attachCookie({ res, token: accessToken }); //attach accessToken to cookie
+
+  res.status(201).json({
+    user: {
+      username: newUser.username,
+      email: newUser.email,
+      role: newUser.role,
+    },
+    accessToken,
+  });
+  logger.info('User registered successfully', {
+    id: newUser.id,
+    email: newUser.email,
+    role: newUser.role,
+  });
+});

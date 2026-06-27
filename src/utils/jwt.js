@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const payloadToken = (user) => {
-  return { userId: user._id, role: user.role };
+  return { userId: user.id, role: user.role };
 };
 
 export const createToken = ({ payload }) => {
@@ -16,9 +16,8 @@ export const validToken = ({ token }) => {
 };
 
 export const attachCookie = ({ res, user }) => {
-  const token = createToken({ payload: user });
-
   const sevenDay = 1000 * 60 * 60 * 24 * 7;
+
   res.cookie('token', token, {
     httpOnly: true,
     expires: new Date(Date.now() + sevenDay),
