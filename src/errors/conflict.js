@@ -1,9 +1,9 @@
 import { CustomError } from './customError.js';
 import { StatusCodes } from 'http-status-codes';
 
-class UnauthenticatedError extends CustomError {
+class ConflictError extends CustomError {
   constructor(message) {
     super(message);
-    this.statusCode = StatusCodes.UNAUTHORIZED; //401
+    this.statusCode = StatusCodes.CONFLICT; //409
   }
 }

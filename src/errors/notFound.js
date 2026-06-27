@@ -4,6 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 class NotFoundError extends CustomError {
   constructor(message) {
     super(message);
-    this.statusCode = StatusCodes.NOT_FOUND;
+    this.statusCode = StatusCodes.NOT_FOUND; //404
   }
 }
