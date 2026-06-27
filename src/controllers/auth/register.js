@@ -2,7 +2,7 @@ import { logger } from '../../utils/logger.js';
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/user.js';
 import { CustomError } from '../../errors/customError.js';
-import { attachCookie, payloadToken } from '../../utils/jwt.js';
+import { attachCookie, payloadToken, createToken } from '../../utils/jwt.js';
 
 export const register = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -24,9 +24,6 @@ export const register = asyncHandler(async (req, res) => {
     password,
     role,
   });
-
-  const payload = payloadToken(newUser);
-  attachCookie({ res, user: payload });
 
   const payload = payloadToken(newUser); //payload
   const accessToken = createToken({ payload }); //accessToken

@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { notFound } from './middlewares/404.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { logger } from './utils/logger.js';
+import router from './routers/index.js';
 
 const app = express();
 const whitelist = JSON.parse(process.env.WHITELIST_ORIGINS || '[]');
@@ -36,6 +37,8 @@ app.use(cookieParser(process.env.COOKIES_SECRET));
 app.use(cors(corsOptions));
 
 app.use(morgan('dev'));
+
+app.use('/api', router);
 
 app.use(notFound);
 app.use(errorHandler);
