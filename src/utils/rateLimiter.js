@@ -16,7 +16,7 @@ export const globalLimiter = rateLimit({
   },
 });
 
-export const loginLimiter = rateLimit({
+export const authLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
   max: 5,
 
@@ -27,21 +27,6 @@ export const loginLimiter = rateLimit({
     res.status(429).json({
       success: false,
       message: 'Too many login attempts. Try again in 5 minutes.',
-    });
-  },
-});
-
-export const registerLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 5,
-
-  standardHeaders: true,
-  legacyHeaders: false,
-
-  handler: (req, res) => {
-    res.status(429).json({
-      success: false,
-      message: 'Too many registration attempts. Try again later.',
     });
   },
 });
