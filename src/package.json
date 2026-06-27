@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect --env-file=.env server.js",
-    "logs": "node server.js | pino-pretty"
+    "logs": "node server.js | pino-pretty",
+    "db:migrate": "node --env-file=.env  config/migrate.js",
+    "db:rollback": "node --env-file=.env  config/rollback.js",
+    "make:migration": "node --env-file=.env  scripts/makeMigration.js"
   },
   "keywords": [],
   "author": "soroush",
@@ -28,6 +31,7 @@
     "pino": "^10.3.1",
     "sequelize": "^6.37.8",
     "slugify": "^1.6.9",
+    "umzug": "^3.8.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
