@@ -41,11 +41,6 @@ export const User = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-
-    refreshToken: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
   },
   {
     tableName: 'users',

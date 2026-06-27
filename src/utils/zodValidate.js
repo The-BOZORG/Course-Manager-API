@@ -12,9 +12,13 @@ const registerSchema = z.object({
       'Only letters, numbers and underscore are allowed',
     ),
 
-  email: z.email('invalid email address').toLowerCase().trim().toLowerCase(),
+  email: z.object
+    .email('invalid email address')
+    .toLowerCase()
+    .trim()
+    .toLowerCase(),
 
-  password: z
+  password: z.object
     .string()
     .trim()
     .min(6, 'password must more tha 6 characters')
