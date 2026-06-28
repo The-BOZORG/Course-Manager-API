@@ -9,6 +9,8 @@ export const authenticateUser = async (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
 
+  console.log(req.headers.authorization);
+
   try {
     const { userId, role } = verifyAccessToken(token);
     req.user = { userId, role };
