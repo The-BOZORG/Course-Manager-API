@@ -21,19 +21,19 @@ userRouter.get(
 );
 
 userRouter.get(
-  '/:id',
+  '/me',
   globalLimiter,
   authenticateUser,
-  authorizePermissions('admin'),
-  getUser,
+  authorizePermissions('admin', 'user'),
+  currentUser,
 );
 
 userRouter.get(
   '/:id',
   globalLimiter,
   authenticateUser,
-  authorizePermissions('admin', 'user'),
-  currentUser,
+  authorizePermissions('admin'),
+  getUser,
 );
 
 userRouter.patch(

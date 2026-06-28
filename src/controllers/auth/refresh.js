@@ -9,9 +9,6 @@ import {
 } from '../../utils/jwt.js';
 
 export const refresh = asyncHandler(async (req, res) => {
-  console.log('cookies:', req.cookies);
-  console.log('signedCookies:', req.signedCookies);
-  console.log('headers cookie:', req.headers.cookie);
   const refreshToken = req.signedCookies.refreshToken;
 
   if (!refreshToken) throw new UnauthenticatedError('auth invalid', 401);
