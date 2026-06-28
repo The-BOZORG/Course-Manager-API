@@ -2,14 +2,21 @@ import { logger } from '../../utils/logger.js';
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/user.js';
 import { UnauthenticatedError } from '../../errors/unauthenticated.js';
-import { payloadToken, createToken, validToken } from '../../utils/jwt.js';
+import {
+  payloadToken,
+  createAccessToken,
+  verifyRefreshToken,
+} from '../../utils/jwt.js';
 
 export const refresh = asyncHandler(async (req, res) => {
-  const refreshToken = req.signedCookies.token;
+  console.log('cookies:', req.cookies);
+  console.log('signedCookies:', req.signedCookies);
+  console.log('headers cookie:', req.headers.cookie);
+  const refreshToken = req.signedCookies.refreshToken;
 
   if (!refreshToken) throw new UnauthenticatedError('auth invalid', 401);
 
-  const { userId } = validToken({ token: refreshToken });
+  const { userId } = verifyRefreshToken(refreshToken);
 
   const user = await User.findByPk(userId, {
     attributes: ['id', 'username', 'email', 'role'],
@@ -20,7 +27,7 @@ export const refresh = asyncHandler(async (req, res) => {
   }
 
   const payload = payloadToken(user);
-  const accessToken = createToken({ payload });
+  const accessToken = createAccessToken(payload);
 
   res.status(200).json({
     accessToken,

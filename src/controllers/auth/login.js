@@ -3,7 +3,12 @@ import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/user.js';
 import { BadRequestError } from '../../errors/badRequest.js';
 import { UnauthenticatedError } from '../../errors/unauthenticated.js';
-import { attachCookie, payloadToken, createToken } from '../../utils/jwt.js';
+import {
+  attachCookie,
+  payloadToken,
+  createAccessToken,
+  createRefreshToken,
+} from '../../utils/jwt.js';
 
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -15,7 +20,7 @@ export const login = asyncHandler(async (req, res) => {
     where: {
       email,
     },
-    attributes: ['username', 'email', 'password', 'role'],
+    attributes: ['email', 'password', 'role'],
   });
 
   if (!user) throw new UnauthenticatedError('invalid login', 401);
@@ -24,8 +29,11 @@ export const login = asyncHandler(async (req, res) => {
   if (!validPassword) throw new UnauthenticatedError('invalid login', 401);
 
   const payload = payloadToken(user);
-  const accessToken = createToken({ payload });
-  attachCookie({ res, token: accessToken });
+
+  const accessToken = createAccessToken(payload);
+  const refreshToken = createRefreshToken(payload);
+
+  attachCookie({ res, token: refreshToken });
 
   res.status(200).json({
     user: {

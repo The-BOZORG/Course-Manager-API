@@ -2,7 +2,12 @@ import { logger } from '../../utils/logger.js';
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/user.js';
 import { ConflictError } from '../../errors/conflict.js';
-import { attachCookie, payloadToken, createToken } from '../../utils/jwt.js';
+import {
+  attachCookie,
+  payloadToken,
+  createAccessToken,
+  createRefreshToken,
+} from '../../utils/jwt.js';
 
 export const register = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -25,9 +30,12 @@ export const register = asyncHandler(async (req, res) => {
     role,
   });
 
-  const payload = payloadToken(newUser); //payload
-  const accessToken = createToken({ payload }); //accessToken
-  attachCookie({ res, token: accessToken }); //attach accessToken to cookie
+  const payload = payloadToken(newUser);
+
+  const accessToken = createAccessToken(payload);
+  const refreshToken = createRefreshToken(payload);
+
+  attachCookie({ res, token: refreshToken });
 
   res.status(201).json({
     user: {

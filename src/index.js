@@ -36,7 +36,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIES_SECRET));
 app.use(cors(corsOptions));
 
-app.use(morgan('dev'));
+app.use(
+  morgan('dev', {
+    stream: {
+      write: (message) => logger.info(message.trim()),
+    },
+  }),
+);
 
 app.use('/api', router);
 
