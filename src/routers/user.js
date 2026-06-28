@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { getAllUsers } from '../controllers/user/getAllUsers.js';
 import { getUser } from '../controllers/user/getUser.js';
+import { updateUser } from '../controllers/user/updateUser.js';
 
 import { globalLimiter } from '../utils/rateLimiter.js';
 import { authorizePermissions } from '../middlewares/authorizePermissions.js';
@@ -23,6 +24,14 @@ userRouter.get(
   authenticateUser,
   authorizePermissions('admin'),
   getUser,
+);
+
+userRouter.patch(
+  '/:id',
+  globalLimiter,
+  authenticateUser,
+  authorizePermissions('admin', 'user'),
+  updateUser,
 );
 
 export default userRouter;

@@ -12,7 +12,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.findAll({
     where: { role: 'user' },
     attributes: {
-      exclude: ['password'],
+      exclude: ['password', 'id'],
     },
     limit,
     offset,

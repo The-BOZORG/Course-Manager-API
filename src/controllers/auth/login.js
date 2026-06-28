@@ -20,7 +20,6 @@ export const login = asyncHandler(async (req, res) => {
     where: {
       email,
     },
-    attributes: ['email', 'password', 'role'],
   });
 
   if (!user) throw new UnauthenticatedError('invalid login', 401);
