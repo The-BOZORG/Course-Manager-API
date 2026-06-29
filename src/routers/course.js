@@ -2,12 +2,21 @@ import { Router } from 'express';
 
 import { createCourse } from '../controllers/course/createCourse.js';
 import { getCourse } from '../controllers/course/getCourse.js';
+import { getCourseById } from '../controllers/course/getCourseById.js';
 
 import { globalLimiter } from '../utils/rateLimiter.js';
 import { authorizePermissions } from '../middlewares/authorizePermissions.js';
 import { authenticateUser } from '../middlewares/authentication.js';
 
 const courseRouter = Router();
+
+courseRouter.get(
+  '/get-course',
+  authenticateUser,
+  globalLimiter,
+  authorizePermissions('admin', 'instructor'),
+  getCourse,
+);
 
 courseRouter.post(
   '/create',
@@ -18,11 +27,11 @@ courseRouter.post(
 );
 
 courseRouter.get(
-  '/get-course',
+  '/:id',
   authenticateUser,
   globalLimiter,
   authorizePermissions('admin', 'instructor'),
-  getCourse,
+  getCourseById,
 );
 
 export default courseRouter;
