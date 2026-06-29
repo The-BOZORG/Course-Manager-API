@@ -16,7 +16,7 @@ export const createCourse = asyncHandler(async (req, res) => {
   if (!title || !description || !price)
     throw new BadRequestError('All fields are required', 400);
 
-  logger.info('Course created successfully');
+  logger.info(`${title} Course created successfully`);
 
   return res.status(201).json({
     success: true,
