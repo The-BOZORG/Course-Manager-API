@@ -4,6 +4,12 @@ import { DataTypes } from 'sequelize';
 export const Course = sequelize.define(
   'Course',
   {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+
     title: {
       type: DataTypes.STRING(60),
       allowNull: false,
