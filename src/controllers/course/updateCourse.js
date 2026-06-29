@@ -2,7 +2,7 @@ import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { Course } from '../../models/course.js';
 import { BadRequestError } from '../../errors/badRequest.js';
 
-export const getUpdateCourse = asyncHandler(async (req, res) => {
+export const updateCourse = asyncHandler(async (req, res) => {
   const course = await Course.findByPk(req.params.id);
 
   if (!course) throw new BadRequestError('course not found', 400);
