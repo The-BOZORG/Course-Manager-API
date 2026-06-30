@@ -1,5 +1,5 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { Course } from '../../models/associations.js';
+import { Course } from '../../models/course.js';
 import { BadRequestError } from '../../errors/badRequest.js';
 import { NotFoundError } from '../../errors/notFound.js';
 
