@@ -67,16 +67,6 @@ export const Course = sequelize.define(
         },
       },
     },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'active cannot be null',
-        },
-      },
-    },
   },
   {
     tableName: 'courses',

@@ -1,24 +1,9 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { Course, Comment, User } from '../../models/associations.js';
+import { Course } from '../../models/associations.js';
 import { NotFoundError } from '../../errors/notFound.js';
 
 export const getCourseById = asyncHandler(async (req, res) => {
-  const course = await Course.findByPk(req.params.id, {
-    include: [
-      {
-        model: Comment,
-        as: 'comments',
-        attributes: ['id', 'comment', 'status', 'createdAt'],
-        include: [
-          {
-            model: User,
-            as: 'user',
-            attributes: ['id', 'username', 'email'],
-          },
-        ],
-      },
-    ],
-  });
+  const course = await Course.findByPk(req.params.id);
 
   if (!course) throw new NotFoundError('course not found');
 

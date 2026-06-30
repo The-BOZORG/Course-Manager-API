@@ -16,7 +16,6 @@ export const createCourse = asyncHandler(async (req, res) => {
     description,
     price,
     currency,
-    instructorId,
   });
 
   logger.info(`${title} Course created successfully`);
