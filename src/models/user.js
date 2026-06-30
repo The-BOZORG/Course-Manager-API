@@ -1,7 +1,6 @@
 import { sequelize } from '../config/db.js';
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
-import { Comment } from './comment.js';
 
 export const User = sequelize.define(
   'User',
@@ -35,11 +34,13 @@ export const User = sequelize.define(
     role: {
       type: DataTypes.ENUM('user', 'admin', 'instructor'),
       defaultValue: 'user',
+      allowNull: false,
     },
 
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
+      allowNull: false,
     },
   },
   {

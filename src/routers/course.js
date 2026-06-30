@@ -44,7 +44,7 @@ courseRouter.patch(
   updateCourse,
 );
 
-courseRouter.get(
+courseRouter.delete(
   '/delete/:id',
   authenticateUser,
   globalLimiter,

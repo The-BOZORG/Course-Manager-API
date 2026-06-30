@@ -1,7 +1,5 @@
 import { sequelize } from '../config/db.js';
 import { DataTypes } from 'sequelize';
-import { Course } from './course.js';
-import { User } from './user.js';
 
 export const Comment = sequelize.define(
   'Comment',
@@ -20,10 +18,12 @@ export const Comment = sequelize.define(
     status: {
       type: DataTypes.ENUM('pending', 'approved', 'rejected'),
       defaultValue: 'pending',
+      allowNull: false,
     },
     courseId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'course_id',
       references: {
         model: 'courses',
         key: 'id',
@@ -33,6 +33,7 @@ export const Comment = sequelize.define(
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'user_id',
       references: {
         model: 'users',
         key: 'id',

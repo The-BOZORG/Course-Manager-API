@@ -36,7 +36,7 @@ export async function up({ context: queryInterface }) {
       defaultValue: true,
     },
 
-    instructorId: {
+    instructor_id: {
       type: DataTypes.UUID,
       allowNull: false,
     },

@@ -1,7 +1,5 @@
 import { sequelize } from '../config/db.js';
 import { DataTypes } from 'sequelize';
-import { Comment } from './comment.js';
-import { Instructor } from './instructor.js';
 
 export const Course = sequelize.define(
   'Course',
@@ -82,6 +80,11 @@ export const Course = sequelize.define(
     instructorId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'instructor_id',
+      references: {
+        model: 'instructors',
+        key: 'id',
+      },
     },
   },
   {

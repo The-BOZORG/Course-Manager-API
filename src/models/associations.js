@@ -5,34 +5,58 @@ import { Comment } from './comment.js';
 
 // Instructor <-> Course (One-to-Many)
 Instructor.hasMany(Course, {
-  foreignKey: 'instructorId',
+  foreignKey: {
+    name: 'instructorId',
+    field: 'instructor_id',
+    allowNull: false,
+  },
   as: 'courses',
   onDelete: 'CASCADE',
 });
 Course.belongsTo(Instructor, {
-  foreignKey: 'instructorId',
+  foreignKey: {
+    name: 'instructorId',
+    field: 'instructor_id',
+    allowNull: false,
+  },
   as: 'instructor',
 });
 
 // User <-> Comment (One-to-Many)
 User.hasMany(Comment, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    field: 'user_id',
+    allowNull: false,
+  },
   as: 'comments',
   onDelete: 'CASCADE',
 });
 Comment.belongsTo(User, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    field: 'user_id',
+    allowNull: false,
+  },
   as: 'user',
 });
 
 // Course <-> Comment (One-to-Many)
 Course.hasMany(Comment, {
-  foreignKey: 'courseId',
+  foreignKey: {
+    name: 'courseId',
+    field: 'course_id',
+    allowNull: false,
+  },
   as: 'comments',
   onDelete: 'CASCADE',
 });
 Comment.belongsTo(Course, {
-  foreignKey: 'courseId',
+  foreignKey: {
+    name: 'courseId',
+    field: 'course_id',
+    allowNull: false,
+  },
   as: 'course',
 });
 
