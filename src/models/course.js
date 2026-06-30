@@ -77,6 +77,10 @@ export const Course = sequelize.define(
         },
       },
     },
+    instructorId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
   },
   {
     tableName: 'courses',
