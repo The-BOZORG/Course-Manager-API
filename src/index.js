@@ -30,7 +30,11 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+);
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIES_SECRET));
@@ -44,7 +48,7 @@ app.use(
   }),
 );
 
-app.use('/api', router);
+app.use('/', router);
 
 app.use(notFound);
 app.use(errorHandler);

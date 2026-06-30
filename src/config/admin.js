@@ -1,8 +1,6 @@
 import AdminJS from 'adminjs';
-import AdminJSExpress from '@adminjs/express';
 import * as AdminJSSequelize from '@adminjs/sequelize';
 
-import { sequelize } from './db.js';
 import { User } from '../models/user.js';
 import { Course } from '../models/course.js';
 
@@ -12,11 +10,11 @@ AdminJS.registerAdapter({
 });
 
 const admin = new AdminJS({
-  databases: [sequelize],
   rootPath: '/admin',
-
-  resources: [User, Course],
-
+  resources: [
+    { resource: User, options: {} },
+    { resource: Course, options: {} },
+  ],
   branding: {
     companyName: 'My App Admin',
   },
