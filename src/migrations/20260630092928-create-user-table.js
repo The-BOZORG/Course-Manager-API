@@ -1,52 +1,57 @@
 import { DataTypes } from 'sequelize';
 
 export async function up({ context: queryInterface }) {
-  await queryInterface.createTable('courses', {
+  await queryInterface.createTable('users', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-    },
-
-    title: {
-      type: DataTypes.STRING(60),
       allowNull: false,
     },
 
-    description: {
-      type: DataTypes.TEXT,
+    username: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
+    },
+
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
+    },
+
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
 
-    price: {
-      type: DataTypes.DECIMAL(10, 2),
+    role: {
+      type: DataTypes.ENUM('user', 'admin', 'instructor'),
+      defaultValue: 'user',
       allowNull: false,
     },
 
-    currency: {
-      type: DataTypes.STRING(3),
-      allowNull: false,
-      defaultValue: 'USD',
-    },
-
-    active: {
+    is_active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
       defaultValue: true,
+      allowNull: false,
     },
 
     created_at: {
-      type: DataTypes.DATE,
       allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
 
     updated_at: {
-      type: DataTypes.DATE,
       allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
   });
 }
 
 export async function down({ context: queryInterface }) {
-  await queryInterface.dropTable('courses');
+  await queryInterface.dropTable('users');
 }

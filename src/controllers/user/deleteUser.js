@@ -1,6 +1,6 @@
 import { logger } from '../../utils/logger.js';
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { User } from '../../models/user.js';
+import { User } from '../../models/associations.js';
 import { NotFoundError } from '../../errors/notFound.js';
 import { checkPermissions } from '../../utils/checkPermissions.js';
 

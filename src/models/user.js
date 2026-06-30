@@ -1,6 +1,7 @@
 import { sequelize } from '../config/db.js';
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
+import { Comment } from './comment.js';
 
 export const User = sequelize.define(
   'User',

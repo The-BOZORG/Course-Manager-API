@@ -1,5 +1,5 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { Course } from '../../models/course.js';
+import { Course } from '../../models/associations.js';
 
 export const getCourse = asyncHandler(async (req, res) => {
   const courses = await Course.findAll();

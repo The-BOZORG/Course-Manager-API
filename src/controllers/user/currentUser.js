@@ -1,5 +1,5 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { User } from '../../models/user.js';
+import { User } from '../../models/associations.js';
 import { NotFoundError } from '../../errors/notFound.js';
 
 export const currentUser = asyncHandler(async (req, res) => {

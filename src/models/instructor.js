@@ -34,6 +34,3 @@ export const Instructor = sequelize.define(
     underscored: true,
   },
 );
-
-Instructor.hasMany(Course, { foreignKey: 'instructorId' });
-Course.belongsTo(Instructor, { foreignKey: 'instructorId' });
