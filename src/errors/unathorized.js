@@ -4,6 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 export class UnauthorizedError extends CustomError {
   constructor(message) {
     super(message);
-    this.statusCode = StatusCodes.FORBIDDEN; //401
+    this.statusCode = StatusCodes.FORBIDDEN; //403
   }
 }

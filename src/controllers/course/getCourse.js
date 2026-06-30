@@ -6,11 +6,6 @@ export const getCourse = asyncHandler(async (req, res) => {
   const courses = await Course.findAll({
     include: [
       {
-        model: Instructor,
-        as: 'instructor',
-        attributes: ['id', 'name', 'mobile', 'bio', 'website'],
-      },
-      {
         model: Comment,
         as: 'comments',
         attributes: ['id', 'comment', 'status', 'userId', 'createdAt'],

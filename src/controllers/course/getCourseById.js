@@ -1,15 +1,10 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { Course, Instructor, Comment, User } from '../../models/associations.js';
+import { Course, Comment, User } from '../../models/associations.js';
 import { NotFoundError } from '../../errors/notFound.js';
 
 export const getCourseById = asyncHandler(async (req, res) => {
   const course = await Course.findByPk(req.params.id, {
     include: [
-      {
-        model: Instructor,
-        as: 'instructor',
-        attributes: ['id', 'name', 'mobile', 'bio', 'website'],
-      },
       {
         model: Comment,
         as: 'comments',

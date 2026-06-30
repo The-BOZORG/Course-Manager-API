@@ -77,15 +77,6 @@ export const Course = sequelize.define(
         },
       },
     },
-    instructorId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      field: 'instructor_id',
-      references: {
-        model: 'instructors',
-        key: 'id',
-      },
-    },
   },
   {
     tableName: 'courses',

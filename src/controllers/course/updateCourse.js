@@ -1,5 +1,5 @@
 import { asyncHandler } from '../../middlewares/asyncHandler.js';
-import { Course, Instructor } from '../../models/associations.js';
+import { Course } from '../../models/associations.js';
 import { BadRequestError } from '../../errors/badRequest.js';
 import { NotFoundError } from '../../errors/notFound.js';
 import { logger } from '../../utils/logger.js';
@@ -16,16 +16,6 @@ export const updateCourse = asyncHandler(async (req, res) => {
   if (description !== undefined) updateData.description = description;
   if (price !== undefined) updateData.price = price;
   if (currency !== undefined) updateData.currency = currency;
-
-  if (instructorId !== undefined) {
-    const instructor = await Instructor.findByPk(instructorId, {
-      attributes: ['id'],
-    });
-
-    if (!instructor) throw new BadRequestError('instructor not found', 400);
-
-    updateData.instructorId = instructorId;
-  }
 
   if (!Object.keys(updateData).length)
     throw new BadRequestError('provide at least one field to update', 400);
