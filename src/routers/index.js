@@ -5,6 +5,7 @@ import admin from '../config/admin.js';
 import authRouter from './auth.js';
 import userRouter from './user.js';
 import courseRouter from './course.js';
+import commentRouter from './comment.js';
 import adminRouter from './admin.js';
 
 const router = Router();
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
 router.use('/course', courseRouter);
+router.use('/comment', commentRouter);
 router.use(admin.options.rootPath, adminRouter);
 
 export default router;
