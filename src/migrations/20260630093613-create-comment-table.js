@@ -14,11 +14,6 @@ export async function up({ context: queryInterface }) {
       allowNull: false,
     },
 
-    course_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
-
     user_id: {
       type: DataTypes.UUID,
       allowNull: false,

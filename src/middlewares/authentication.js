@@ -14,6 +14,6 @@ export const authenticateUser = async (req, res, next) => {
     req.user = { userId, role };
     next();
   } catch (error) {
-    throw new UnauthorizedError('auth invalid', 401);
+    throw new UnauthorizedError('auth invalid', 403);
   }
 };

@@ -20,16 +20,6 @@ export const Comment = sequelize.define(
       defaultValue: 'pending',
       allowNull: false,
     },
-    courseId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      field: 'course_id',
-      references: {
-        model: 'courses',
-        key: 'id',
-      },
-    },
-
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
