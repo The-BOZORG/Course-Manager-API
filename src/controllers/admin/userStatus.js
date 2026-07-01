@@ -3,7 +3,7 @@ import { asyncHandler } from '../../middlewares/asyncHandler.js';
 import { User } from '../../models/associations.js';
 import { NotFoundError } from '../../errors/notFound.js';
 
-export const changeRole = asyncHandler(async (req, res) => {
+export const userStatus = asyncHandler(async (req, res) => {
   const { isActive } = req.body;
   const user = await User.findByPk(req.params.id);
 
