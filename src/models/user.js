@@ -37,6 +37,11 @@ export const User = sequelize.define(
       allowNull: false,
     },
 
+    instructorRequest: {
+      type: DataTypes.ENUM('none', 'pending', 'approved', 'rejected'),
+      defaultValue: 'none',
+    },
+
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
