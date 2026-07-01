@@ -10,7 +10,7 @@ export const deleteComment = asyncHandler(async (req, res) => {
 
   await comment.destroy();
 
-  logger.info(`comment with this id: ${req.params.id} deleted`);
+  logger.info(`Comment ${comment.id} deleted`);
 
   return res.status(200).json({
     success: true,
