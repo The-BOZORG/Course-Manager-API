@@ -5,6 +5,7 @@ import { getUser } from '../controllers/user/getUser.js';
 import { updateUser } from '../controllers/user/updateUser.js';
 import { currentUser } from '../controllers/user/currentUser.js';
 import { deleteUser } from '../controllers/user/deleteUser.js';
+import { requestInstructor } from '../controllers/user/requestInstructor .js';
 
 import { globalLimiter } from '../utils/rateLimiter.js';
 import { authorizePermissions } from '../middlewares/authorizePermissions.js';
@@ -50,6 +51,14 @@ userRouter.delete(
   authenticateUser,
   authorizePermissions('admin', 'user'),
   deleteUser,
+);
+
+userRouter.post(
+  '/request-instructor',
+  globalLimiter,
+  authenticateUser,
+  authorizePermissions('admin', 'user'),
+  requestInstructor,
 );
 
 export default userRouter;

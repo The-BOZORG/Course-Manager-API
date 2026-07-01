@@ -7,6 +7,8 @@ import { userStatus } from '../controllers/admin/userStatus.js';
 import { rejectComment } from '../controllers/admin/rejectComment.js';
 import { approveComment } from '../controllers/admin/approveComment.js';
 import { changeRole } from '../controllers/admin/changeRole.js';
+import { approveInstructorRequest } from '../controllers/admin/approveInstructorRequest .js';
+import { getInstructorRequests } from '../controllers/admin/getInstructorRequests .js';
 
 import { authorizePermissions } from '../middlewares/authorizePermissions.js';
 
@@ -14,6 +16,12 @@ const adminRouter = Router();
 
 //adminRouter.use(authenticateUser, authorizePermissions('admin'));
 adminRouter.use(AdminJSExpress.buildRouter(admin));
+
+adminRouter.get(
+  '/instructor-requests',
+  authorizePermissions('admin'),
+  getInstructorRequests,
+);
 
 adminRouter.get(
   '/comment/pending',
@@ -35,6 +43,12 @@ adminRouter.patch(
   '/comment/reject/:id',
   authorizePermissions('admin'),
   rejectComment,
+);
+
+adminRouter.patch(
+  '/instructor-requests/approve/:id',
+  authorizePermissions('admin'),
+  approveInstructorRequest,
 );
 
 export default adminRouter;
